@@ -50,8 +50,8 @@ function millisToDaysHoursMinutes(millis) {
 
 function busRoute(totalDays) {
     const DAYS_PER_WEEK = 7,
-     PRESENTIAL_DAYS = 2,
-     ROUND_TRIP = 2;
+        PRESENTIAL_DAYS = 2,
+        ROUND_TRIP = 2;
 
     const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0)
     const busROUTE = ((totalWeek * PRESENTIAL_DAYS) * ROUND_TRIP).toFixed(0)
@@ -61,10 +61,10 @@ function busRoute(totalDays) {
 
 function stepRemaining(totalDays) {
     const STEP_PER_KM = 1400,
-     KM_GYM = 2.5,
-     KM_STORE = 3.5,
-     DAYS_PER_WEEK = 7,
-     ROUND_TRIP = 2;
+        KM_GYM = 2.5,
+        KM_STORE = 3.5,
+        DAYS_PER_WEEK = 7,
+        ROUND_TRIP = 2;
 
     const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0);
     const RoundTripGym = ((totalWeek) * ROUND_TRIP);

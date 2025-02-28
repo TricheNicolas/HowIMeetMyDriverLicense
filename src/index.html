@@ -7,6 +7,7 @@
     <title>How I meet my driver License</title>
     <link rel="shortcut icon" type="image/webp" href="img/Comment-te-recuperer-full.webp" />
     <link rel="stylesheet" href="css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,26 +23,42 @@
 
             <label for="end">End date:</label>
             <input type="date" id="end" value="2025-06-23" name="trip-end" min="2018-01-01" max="2030-12-31" />
+        </div>
 
-            <div class="containerProgressBar">  
-                <div id="progressText">File progress at: 0%</div>
-                <div class="progress progress-striped">
-                    <div class="progress-bar" id="dynamicProgressBar"></div>                       
-                </div> 
+        <div class="containerProgressBar">
+            <div id="progressText">File progress at: 0%</div>
+            <div class="progress progress-striped">
+                <div class="progress-bar" id="dynamicProgressBar"></div>
             </div>
         </div>
 
-        
+        <div class="informations">
+            <div class="timeRemaining">
+                <div class="countdown" id="js-countdown">
 
-        <div class="timeRemaining">
-            <h3>Times remaining</h3>
-            <ul>
-                <li>Days : <span id="days"></span></li>
-                <li>Hours : <span id="hours"></span></li>
-                <li>Minutes : <span id="minutes"></span></li>
-                <li>Seconds : <span id="seconds"></span></li>
-            </ul>
+                    <div class="countdown__item countdown__item--large">
+                        <div class="countdown__timer js-countdown-days" id="days"></div>
+                        <div class="countdown__label" id="day-countdown">Days</div>
+                    </div>
+
+                    <div class="countdown__item">
+                        <div class="countdown__timer js-countdown-hours" id="hours"></div>
+                        <div class="countdown__label" id="hour-countdown">Hours</div>
+                    </div>
+
+                    <div class="countdown__item">
+                        <div class="countdown__timer js-countdown-minutes" id="minutes"></div>
+                        <div class="countdown__label" id="minute-countdown">Minutes</div>
+                    </div>
+
+                    <div class="countdown__item">
+                        <div class="countdown__timer js-countdown-seconds" id="seconds"></div>
+                        <div class="countdown__label" id="second-countdown">Seconds</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="busRouteRemaining">
             <h3>Bus route remaining : <span id="busRouteDisplay"></span></h3>
         </div>
@@ -50,7 +67,6 @@
         </div>
     </div>
     <script src="js/index.js"></script>
-
 </body>
 
 </html>
