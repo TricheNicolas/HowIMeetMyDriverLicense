@@ -159,3 +159,33 @@ img {
     font-size: 1em;
     padding-top: .40em;
 }
+
+/******************* CSS Display busRoute and steps *******************/
+
+.infoContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacement entre les cartes */
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    margin-top: 2.5rem;
+}
+
+.infoBox {
+    background: linear-gradient(135deg, #F8F0FF, #C2A2E3);
+    border-radius: 12px;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.separator {
+    width: 65%;
+    height: 5px;
+    background: linear-gradient(90deg, #9370DB, #6A5ACD);
+    border-radius: 5px;
+}
