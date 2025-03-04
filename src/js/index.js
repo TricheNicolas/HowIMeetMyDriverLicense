@@ -4,30 +4,34 @@ function timer() {
     const endInput = new Date(document.getElementById("end").value).getTime()
 
     if (!startInput || !endInput) {
-        document.getElementById("labelFileProgress").innerText = "Please enter valid dates.";
+        document.getElementById("progressText").innerText = "Please enter valid dates.";
         return;
     }
-
-    const startDate = new Date(startInput).getTime();
-    const endDate = new Date(endInput).getTime();
-    const currentDate = new Date().getTime()
-
-    if (isNaN(startDate) || isNaN(endDate) || startDate >= endDate) {
-        document.getElementById("labelFileProgress").innerText = "Invalid date range.";
+ 
+    if (startInput > endInput) {
+        document.getElementById("progressText").innerText = "Invalid date range.";
         return;
+    }else{
+        const startDate = new Date(startInput).getTime();
+        const endDate = new Date(endInput).getTime();
+        const currentDate = new Date().getTime()
+    
+        if (isNaN(startDate) || isNaN(endDate) || startDate >= endDate) {
+            document.getElementById("labelFileProgress").innerText = "Invalid date range.";
+            return;
+        }
+    
+        const remainingTime = endDate - currentDate
+        const totalTime = endDate - startDate
+        const spentTime = currentDate - startDate
+    
+        const percentageTime = (spentTime / totalTime * 100).toFixed(6)
+    
+        document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
+        document.getElementById("progressText").innerText = "Progress at : " + percentageTime + "%";
+    
+        millisToDaysHoursMinutes(remainingTime)
     }
-
-    const remainingTime = endDate - currentDate
-    const totalTime = endDate - startDate
-    const spentTime = currentDate - startDate
-
-    const percentageTime = (spentTime / totalTime * 100).toFixed(6)
-
-    document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
-    document.getElementById("progressText").innerText = "Progress at : " + percentageTime + "%";
-
-    millisToDaysHoursMinutes(remainingTime)
-
 }
 
 function millisToDaysHoursMinutes(millis) {
@@ -50,8 +54,8 @@ function millisToDaysHoursMinutes(millis) {
 
 function busRoute(totalDays) {
     const DAYS_PER_WEEK = 7,
-     PRESENTIAL_DAYS = 2,
-     ROUND_TRIP = 2;
+        PRESENTIAL_DAYS = 2,
+        ROUND_TRIP = 2;
 
     const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0)
     const busROUTE = ((totalWeek * PRESENTIAL_DAYS) * ROUND_TRIP).toFixed(0)
@@ -61,10 +65,10 @@ function busRoute(totalDays) {
 
 function stepRemaining(totalDays) {
     const STEP_PER_KM = 1400,
-     KM_GYM = 2.5,
-     KM_STORE = 3.5,
-     DAYS_PER_WEEK = 7,
-     ROUND_TRIP = 2;
+        KM_GYM = 2.5,
+        KM_STORE = 3.5,
+        DAYS_PER_WEEK = 7,
+        ROUND_TRIP = 2;
 
     const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0);
     const RoundTripGym = ((totalWeek) * ROUND_TRIP);
