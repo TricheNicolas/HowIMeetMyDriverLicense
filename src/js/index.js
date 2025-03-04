@@ -7,31 +7,41 @@ function timer() {
         document.getElementById("progressText").innerText = "Please enter valid dates.";
         return;
     }
- 
-    if (startInput > endInput) {
+
+    const startDate = new Date(startInput).getTime();
+    const endDate = new Date(endInput).getTime();
+    const currentDate = new Date().getTime()
+
+    if (isNaN(startDate) || isNaN(endDate) || startDate > endDate || currentDate < startDate) {
         document.getElementById("progressText").innerText = "Invalid date range.";
         return;
-    }else{
-        const startDate = new Date(startInput).getTime();
-        const endDate = new Date(endInput).getTime();
-        const currentDate = new Date().getTime()
-    
-        if (isNaN(startDate) || isNaN(endDate) || startDate >= endDate) {
-            document.getElementById("labelFileProgress").innerText = "Invalid date range.";
-            return;
-        }
-    
-        const remainingTime = endDate - currentDate
-        const totalTime = endDate - startDate
-        const spentTime = currentDate - startDate
-    
-        const percentageTime = (spentTime / totalTime * 100).toFixed(6)
-    
-        document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
-        document.getElementById("progressText").innerText = "Progress at : " + percentageTime + "%";
-    
-        millisToDaysHoursMinutes(remainingTime)
     }
+
+    const remainingTime = endDate - currentDate
+    const totalTime = endDate - startDate
+    const spentTime = currentDate - startDate
+
+    let percentageTime = (spentTime / totalTime * 100).toFixed(6)
+    if (percentageTime > 100) {
+        percentageTime = 100
+        document.getElementById("progressText").innerText = "You're done!";
+    }else{
+        document.getElementById("progressText").innerText = "Progress at : " + percentageTime + "%";
+    }
+
+    document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
+
+    if (startDate === endDate || currentDate > endDate) {
+        document.getElementById("congratsModal").style.display = "flex";
+    } else {
+        document.getElementById("congratsModal").style.display = "none";
+    }
+    document.getElementById("closeModal").addEventListener("click", function () {
+        document.getElementById("congratsModal").style.display = "none";
+    });
+
+    millisToDaysHoursMinutes(remainingTime)
+
 }
 
 function millisToDaysHoursMinutes(millis) {
