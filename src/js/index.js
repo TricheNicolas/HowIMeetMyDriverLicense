@@ -1,37 +1,60 @@
 function timer() {
 
-    const startInput = new Date(document.getElementById("start").value).getTime()
-    const endInput = new Date(document.getElementById("end").value).getTime()
+    const startInput = new Date(document.getElementById("start").value).getTime(),
+        endInput = new Date(document.getElementById("end").value).getTime();
 
     if (!startInput || !endInput) {
-        document.getElementById("progressText").innerText = "Please enter valid dates.";
+        updateTexte("progressText", "Please enter valid dates.");
         return;
     }
- 
-    if (startInput > endInput) {
-        document.getElementById("progressText").innerText = "Invalid date range.";
+
+    const startDate = new Date(startInput).getTime(),
+        endDate = new Date(endInput).getTime(),
+        currentDate = new Date().getTime();
+
+    if (isNaN(startDate) || isNaN(endDate) || startDate > endDate || currentDate < startDate) {
+        updateTexte("progressText", "Invalid date range.");
         return;
-    }else{
-        const startDate = new Date(startInput).getTime();
-        const endDate = new Date(endInput).getTime();
-        const currentDate = new Date().getTime()
-    
-        if (isNaN(startDate) || isNaN(endDate) || startDate >= endDate) {
-            document.getElementById("labelFileProgress").innerText = "Invalid date range.";
-            return;
-        }
-    
-        const remainingTime = endDate - currentDate
-        const totalTime = endDate - startDate
-        const spentTime = currentDate - startDate
-    
-        const percentageTime = (spentTime / totalTime * 100).toFixed(6)
-    
-        document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
-        document.getElementById("progressText").innerText = "Progress at : " + percentageTime + "%";
-    
-        millisToDaysHoursMinutes(remainingTime)
     }
+
+    if (startInput === endInput || currentDate > endDate) {
+        document.getElementById("congratsModal").style.display = "flex";
+    } else {
+        document.getElementById("congratsModal").style.display = "none";
+    }
+    document.getElementById("closeModal").addEventListener("click", function () {
+        document.getElementById("congratsModal").style.display = "none";
+    });
+
+    const { remaining, total, spent } = getTimeDiff(startDate, endDate);
+
+    let percentageTime = (spent / total * 100).toFixed(6)
+    if (percentageTime >= 50) {
+        updateTexte("progressText", "Plus que la moitié, courage !");
+    }
+    if (percentageTime > 100) {
+        percentageTime = 100;
+        updateTexte("progressText", "You're done!");
+    } else {
+        updateTexte("progressText", "Progress at : " + percentageTime + "%");
+    }
+
+    document.getElementById("dynamicProgressBar").style.width = percentageTime + "%";
+
+    millisToDaysHoursMinutes(remaining);
+
+}
+
+function getTimeDiff(start, end) {
+    return {
+        remaining: end - new Date().getTime(),
+        total: end - start,
+        spent: new Date().getTime() - start
+    };
+}
+
+function updateTexte(id, text) {
+    document.getElementById(id).innerText = text;
 }
 
 function millisToDaysHoursMinutes(millis) {
@@ -41,15 +64,15 @@ function millisToDaysHoursMinutes(millis) {
         hour = minute * 60,
         day = hour * 24;
 
-    const daysRemaining = Math.floor(millis / (day))
+    const daysRemaining = Math.floor(millis / (day));
 
-    document.getElementById("days").innerText = daysRemaining
-    document.getElementById("hours").innerText = Math.floor((millis % (day)) / (hour))
-    document.getElementById("minutes").innerText = Math.floor((millis % (hour)) / (minute))
-    document.getElementById("seconds").innerText = Math.floor((millis % (minute)) / second)
+    document.getElementById("days").innerText = daysRemaining;
+    document.getElementById("hours").innerText = Math.floor((millis % (day)) / (hour));
+    document.getElementById("minutes").innerText = Math.floor((millis % (hour)) / (minute));
+    document.getElementById("seconds").innerText = Math.floor((millis % (minute)) / second);
 
-    busRoute(daysRemaining)
-    stepRemaining(daysRemaining)
+    busRoute(daysRemaining);
+    stepRemaining(daysRemaining);
 }
 
 function busRoute(totalDays) {
@@ -57,10 +80,10 @@ function busRoute(totalDays) {
         PRESENTIAL_DAYS = 2,
         ROUND_TRIP = 2;
 
-    const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0)
-    const busROUTE = ((totalWeek * PRESENTIAL_DAYS) * ROUND_TRIP).toFixed(0)
+    const totalWeek = (totalDays / DAYS_PER_WEEK).toFixed(0);
+    const busROUTE = ((totalWeek * PRESENTIAL_DAYS) * ROUND_TRIP).toFixed(0);
 
-    document.getElementById("busRouteDisplay").innerText = busROUTE
+    document.getElementById("busRouteDisplay").innerText = busROUTE;
 }
 
 function stepRemaining(totalDays) {
