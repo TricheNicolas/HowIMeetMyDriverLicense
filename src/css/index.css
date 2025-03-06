@@ -1,5 +1,12 @@
+:root {
+    --primary-color: #9370DB;
+    --secondary-color: #6A5ACD;
+    --button-color: #b380ff;
+    --background-gradient: linear-gradient(135deg, #D8BFD8, #9370DB);
+}
+
 body {
-    background: linear-gradient(135deg, #D8BFD8, #9370DB);
+    background: var(--background-gradient);
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -10,7 +17,7 @@ h1 {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #9370DB, #6A5ACD);
+    background: linear-gradient(90deg,var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
@@ -24,14 +31,14 @@ h1 {
 
 input,
 button {
-    border: 2px solid #b380ff;
+    border: 2px solid var(--button-color);
     border-radius: 5px;
     padding: 8px 12px;
     font-size: 16px;
 }
 
 button {
-    background-color: #b380ff;
+    background-color: var(--button-color);
     color: white;
     cursor: pointer;
     transition: 0.3s;
@@ -108,7 +115,7 @@ img {
 
 .progress-bar {
     height: 18px;
-    background-color: #ee303c;
+    transition: width 0.5s ease-in-out;
     border-radius: 4px;
 }
 
@@ -201,8 +208,8 @@ img {
 @media (max-width: 768px) {
     .infoContainer {
         width: 70%;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 
@@ -220,7 +227,7 @@ img {
 .separator {
     width: 65%;
     height: 5px;
-    background: linear-gradient(90deg, #9370DB, #6A5ACD);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     border-radius: 5px;
 }
 
@@ -247,7 +254,7 @@ img {
 }
 
 .modalContent {
-    background: linear-gradient(135deg, #9370DB, #6A5ACD);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 20px;
     border-radius: 10px;
@@ -262,7 +269,7 @@ img {
 
 .modalContent button {
     background: white;
-    color: #6A5ACD;
+    color: var(--secondary-color);
     border: none;
     padding: 10px 20px;
     margin-top: 10px;
