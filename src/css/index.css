@@ -151,8 +151,8 @@ img {
 .countdown {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    width: 75%;
+    justify-content: space-evenly;
+    width: 80%;
     max-width: 20rem;
     margin: 0 auto;
 }
